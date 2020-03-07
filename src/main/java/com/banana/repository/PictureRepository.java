@@ -9,7 +9,7 @@ public class PictureRepository {
                 "org.postgresql.Driver",
                 "jdbc:postgresql://localhost:5432/banana",
                 "postgres",
-                "postgres");
+                "example");
         //open.openTransaction();
 //       Picture picture = new Picture();
 //picture.setId(1);
