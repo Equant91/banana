@@ -2,17 +2,37 @@ package com.banana.model;
 
 import org.javalite.activejdbc.LazyList;
 import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.Table;
 
+@Table("picture")
 public class Picture extends Model {
 
-    public LazyList<Label> getLabel() {
-        return getAll(Label.class);
+    public LazyList<LabelAnnotation> getLabel() {
+        return getAll(LabelAnnotation.class);
     }
 
-    public void addLabel(Label label) {
-        add(label);
+    public void addLabel(LabelAnnotation labelAnnotation) {
+        add(labelAnnotation);
     }
-    public void setLabel( LazyList<Label>  labels) {
-        set(labels);
+
+    public void setLabel(LazyList<LabelAnnotation> labelAnnotations) {
+        set(labelAnnotations);
     }
+
+    public SafeAnnotation getSafeAnnotation() {
+        return SafeAnnotation.findById(getSafeAnnotationId());
+    }
+
+    public void setSafeAnnotation(Long id) {
+        set("safe_annotation_id", id);
+    }
+
+    public void setSafeAnnotation(SafeAnnotation setSafeAnnotation) {
+        setSafeAnnotation(setSafeAnnotation.getLongId());
+    }
+
+    private Long getSafeAnnotationId() {
+        return getLong("safe_annotation_id");
+    }
+
 }

@@ -1,13 +1,15 @@
 package com.banana.model;
 
 import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.Table;
 
-public class Label extends Model {
+@Table("label_annotation")
+public class LabelAnnotation extends Model {
     public String getName() {
-        return getString("name");
+        return getString("kab");
     }
 
-    public void getName(String name) {
+    public void setName(String name) {
         set("name", name);
     }
 
@@ -15,7 +17,7 @@ public class Label extends Model {
         return getDouble("score");
     }
 
-    public void getName(Double score) {
+    public void setScore(Double score) {
         set("score", score);
     }
 }
