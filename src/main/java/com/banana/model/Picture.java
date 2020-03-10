@@ -35,4 +35,12 @@ public class Picture extends Model {
         return getLong("safe_annotation_id");
     }
 
+    public String getUrl() {
+        return getString("url");
+    }
+
+    public void setUrl(String url) {
+        set("url", url);
+    }
+
 }

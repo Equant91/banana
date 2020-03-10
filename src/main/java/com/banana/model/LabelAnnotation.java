@@ -6,18 +6,18 @@ import org.javalite.activejdbc.annotations.Table;
 @Table("label_annotation")
 public class LabelAnnotation extends Model {
     public String getName() {
-        return getString("kab");
+        return getString("name");
     }
 
     public void setName(String name) {
         set("name", name);
     }
 
-    public Double getScore() {
-        return getDouble("score");
+    public Float getScore() {
+        return getFloat("score");
     }
 
-    public void setScore(Double score) {
+    public void setScore(Float score) {
         set("score", score);
     }
 }
