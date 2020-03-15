@@ -17,7 +17,7 @@ public class DbOpenWithTransactionAnnotationInterceptor implements MethodInterce
         } catch (Exception e) {
             try {
                 Base.rollbackTransaction();
-            }catch (Exception a) {
+            } catch (Exception a) {
                 throw e;
             }
             throw e;

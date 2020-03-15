@@ -5,7 +5,6 @@ CREATE table if not exists owner
 );
 
 CREATE table if not exists safe_annotation
-
 (
     id         bigserial PRIMARY KEY,
     adult      INTEGER,

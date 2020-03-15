@@ -1,5 +1,6 @@
 package com.banana.service;
 
+import com.banana.service.I.IFlickrService;
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.photos.Photo;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Singleton
-public class FlickrService {
+public class FlickrService implements IFlickrService {
 
     private final Flickr flickr;
 
@@ -23,18 +24,19 @@ public class FlickrService {
         this.flickr = flickr;
     }
 
+    @Override
     public PhotoList<Photo> findByUserId(String userId, int perPage, int page) throws FlickrException, IOException {
         PhotosInterface photosInterface = flickr.getPhotosInterface();
         SearchParameters params = getSearchParams();
         params.setUserId(userId);
         return photosInterface.search(params, perPage, page);
-
     }
 
-    public PhotoList<Photo> search(String search, int perPage, int page) throws FlickrException {
+    @Override
+    public PhotoList<Photo> findByQuery(String query, int perPage, int page) throws FlickrException {
         PhotosInterface photos = flickr.getPhotosInterface();
         SearchParameters params = getSearchParams();
-        params.setText(search);
+        params.setText(query);
         return photos.search(params, perPage, page);
     }
 

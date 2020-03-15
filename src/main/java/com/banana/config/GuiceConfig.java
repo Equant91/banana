@@ -3,6 +3,14 @@ package com.banana.config;
 import com.banana.Application;
 import com.banana.annotation.DbOpenWithTransaction;
 import com.banana.annotation.DbOpenWithTransactionAnnotationInterceptor;
+import com.banana.repository.I.IPictureRepository;
+import com.banana.repository.PictureRepository;
+import com.banana.service.BananaService;
+import com.banana.service.FlickrService;
+import com.banana.service.I.IBananaService;
+import com.banana.service.I.IFlickrService;
+import com.banana.service.I.IVisionService;
+import com.banana.service.VisionService;
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.REST;
 import com.google.inject.AbstractModule;
@@ -18,6 +26,10 @@ public class GuiceConfig extends AbstractModule {
     @Override
     protected void configure() {
         bind(Application.class).in(Singleton.class);
+        bind(IPictureRepository.class).to(PictureRepository.class);
+        bind(IBananaService.class).to(BananaService.class);
+        bind(IVisionService.class).to(VisionService.class);
+        bind(IFlickrService.class).to(FlickrService.class);
         bindInterceptor(Matchers.any(),
                 Matchers.annotatedWith(DbOpenWithTransaction.class),
                 new DbOpenWithTransactionAnnotationInterceptor());
@@ -25,7 +37,7 @@ public class GuiceConfig extends AbstractModule {
 
     @Provides
     @Singleton
-    private Flickr flickr(){
+    private Flickr flickr() {
         return new Flickr(apiKey, sharedSecret, new REST());
     }
 

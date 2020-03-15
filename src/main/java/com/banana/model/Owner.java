@@ -7,7 +7,7 @@ import org.javalite.activejdbc.annotations.Table;
 @Table("owner")
 public class Owner extends Model {
 
-    public LazyList<Picture> getPicture() {
+    public LazyList<Picture> getPictures() {
         return getAll(Picture.class);
     }
 

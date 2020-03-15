@@ -1,8 +1,9 @@
 package com.banana.service;
 
+import com.banana.service.I.IFlickrService;
+import com.banana.service.I.IVisionService;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.photos.Photo;
-import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.Size;
 import com.google.cloud.vision.v1.*;
 import com.google.cloud.vision.v1.Feature.Type;
@@ -18,19 +19,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
-public class VisionService {
+public class VisionService implements IVisionService {
 
-    private final FlickrService flickrService;
     private static final Logger LOGGER = LogManager.getLogger(VisionService.class.getName());
+    private final IFlickrService flickrService;
 
     @Inject
-    public VisionService(FlickrService flickrService) {
+    public VisionService(IFlickrService flickrService) {
         this.flickrService = flickrService;
     }
 
-    public List<AnnotateImageResponse> vision(PhotoList<Photo> photos) throws IOException, FlickrException {
+    @Override
+    public List<AnnotateImageResponse> vision(List<Photo> photos) throws IOException, FlickrException {
         List<AnnotateImageRequest> requests = new ArrayList<>();
-        for(Photo photo:photos){
+        for (Photo photo : photos) {
             AnnotateImageRequest annotateImageRequest = getAnnotateImageRequest(photo);
             requests.add(annotateImageRequest);
         }
@@ -44,8 +46,6 @@ public class VisionService {
                 }
                 return responses;
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         return null;
     }

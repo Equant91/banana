@@ -1,4 +1,4 @@
-package com.banana.api;
+package com.banana.api.response;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ public class PictureResponse {
     String id;
     String url;
     SafeAnnotationResponse safeAnnotationResponse;
+    OwnerResponse ownerResponse;
     List<LabelAnnotationResponse> labelAnnotationResponses;
 
     public String getId() {
@@ -38,5 +39,13 @@ public class PictureResponse {
 
     public void setLabelAnnotationResponses(List<LabelAnnotationResponse> labelAnnotationResponses) {
         this.labelAnnotationResponses = labelAnnotationResponses;
+    }
+
+    public OwnerResponse getOwnerResponse() {
+        return ownerResponse;
+    }
+
+    public void setOwnerResponse(OwnerResponse ownerResponse) {
+        this.ownerResponse = ownerResponse;
     }
 }
